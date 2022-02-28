@@ -3,12 +3,14 @@ import os
 import PyPDF2
 from PyPDF2 import PdfFileMerger
 
-folder = input(str("Please Enter \"YYYY MM\" or Create Folder: "))                          #{Folder} should already be created. It just needs to be directed to that folder
+folder = input(str("Please Enter \"YYYY MM\": "))                          #{Folder} should already be created. It just needs to be directed to that folder
 
 
 path = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\OriginalFinancePackagePDF\*"        #save pdfs to this folder
 wc_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\01-22 Workers Comp Scorecard Consolidated.xlsx v2.pdf"
+#wc_file = fr"P:\PACS\Finance\FP&A\Finance Package\ReportsToAdd\01-22 Workers Comp Scorecard Consolidated.xlsx v2.pdf"
 ar_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\220216 - AR Dashboard_Jan22.pdf"        #folder has to be copied into each input folder unless pulling from Finance package folder
+#ar_file = fr"P:\PACS\Finance\FP&A\Finance Package\ReportsToAdd\220216 - AR Dashboard_Jan22.pdf"
 
 
 try:
