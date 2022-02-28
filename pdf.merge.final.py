@@ -3,16 +3,16 @@ import os
 import PyPDF2
 from PyPDF2 import PdfFileMerger
 
-folder = input(str("Please Enter \"YYYY MM\": "))                                            #{Folder} should already be created. It just needs to be directed to that folder
+folder = input(str("Please Enter \"YYYY MM\" or Create Folder: "))                          #{Folder} should already be created. It just needs to be directed to that folder
 
 
 path = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\OriginalFinancePackagePDF\*"        #save pdfs to this folder
 wc_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\01-22 Workers Comp Scorecard Consolidated.xlsx v2.pdf"
-ar_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\220216 - AR Dashboard_Jan22.pdf"
+ar_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\220216 - AR Dashboard_Jan22.pdf"        #folder has to be copied into each input folder unless pulling from Finance package folder
 
 
 try:
-    os.mkdir(fr"{folder}" + "\\ReportsToSend")
+    os.mkdir(fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToSend")               #Creates ReportsToSend folder in input(folder)
 except:
     pass
 
@@ -38,9 +38,9 @@ for filename in glob(path):
             pdfWriter.addPage(pageObj)
 
         # assign to updated folder
-        save_location = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\Reports to Send{os.path.basename(filename)}.pdf"
+        save_location = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToSend\{os.path.basename(filename)}.pdf"
 
-        pdfOutputFile = open(save_location, 'wb')  # save under Updated w WC with same filename
+        pdfOutputFile = open(save_location, 'wb')                                           # save under Updated w WC with same filename
         pdfWriter.write(pdfOutputFile)
         pdfOutputFile.close()
         pdftopFile.close()
