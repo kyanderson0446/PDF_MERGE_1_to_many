@@ -17,13 +17,13 @@ try:
     os.mkdir(fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToSend")               #Creates ReportsToSend folder in input(folder)
 except:
     pass
-
+counter = 0
 #Iterate through files and assign the original name with the files appended
 for filename in glob(path):
     if filename.endswith(".pdf"):
         pdftopFile = open(filename, 'rb')                                                   #pdf hierarchy
-        pdfbottomFile = open(wc_file, 'rb')
         pdfmidFile = open(ar_file, 'rb')
+        pdfbottomFile = open(wc_file, 'rb')
         pdftopReader = PyPDF2.PdfFileReader(pdftopFile)
         pdfmidReader = PyPDF2.PdfFileReader(pdfmidFile)
         pdfbottomReader = PyPDF2.PdfFileReader(pdfbottomFile)
@@ -40,7 +40,7 @@ for filename in glob(path):
             pdfWriter.addPage(pageObj)
 
         # assign to updated folder
-        save_location = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToSend\{os.path.basename(filename)}.pdf"
+        save_location = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToSend\{os.path.basename(filename)}"
 
         pdfOutputFile = open(save_location, 'wb')                                           # save under Updated w WC with same filename
         pdfWriter.write(pdfOutputFile)
@@ -48,5 +48,7 @@ for filename in glob(path):
         pdftopFile.close()
         pdfmidFile.close()
         pdfbottomFile.close()
+        counter = counter + 1
 
-        print(f"{os.path.basename(filename)} APPEND {os.path.basename(wc_file)} APPEND {os.path.basename(ar_file)}")
+        print(f"{os.path.basename(filename)} APPEND {os.path.basename(ar_file)} APPEND {os.path.basename(wc_file)}")
+print("Total Files Merged -> ", counter)
