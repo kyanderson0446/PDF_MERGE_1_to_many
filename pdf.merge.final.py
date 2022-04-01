@@ -2,17 +2,16 @@ from glob import glob
 import os
 import PyPDF2
 from PyPDF2 import PdfFileMerger
+""""Input to guide you the pre-generated folder thanks to the VBA script"""
+folder = input(str("Please Enter \"YYYY MM\": "))
 
-folder = input(str("Please Enter \"YYYY MM\": "))                          #{Folder} should already be created. It just needs to be directed to that folder
-
-
+""""Updated the new attachments in the Share Drive. May need to be renamed"""
 path = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\OriginalFinancePackagePDF\*"        #save pdfs to this folder
-wc_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\01-22 Workers Comp Scorecard Consolidated.xlsx v2.pdf"
-#wc_file = fr"P:\PACS\Finance\FP&A\Finance Package\ReportsToAdd\01-22 Workers Comp Scorecard Consolidated.xlsx v2.pdf"
-ar_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\220216 - AR Dashboard_Jan22.pdf"        #folder has to be copied into each input folder unless pulling from Finance package folder
-#ar_file = fr"P:\PACS\Finance\FP&A\Finance Package\ReportsToAdd\220216 - AR Dashboard_Jan22.pdf"
+wc_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\02-22 Workers Comp Scorecard Consolidated.xlsx.pdf"
+ar_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\220317 - AR Dashboard_2022.02.pdf"        #folder has to be copied into each input folder unless pulling from Finance package folder
 
 
+"""Begin the process of reports to send by appending the attachments"""
 try:
     os.mkdir(fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToSend")               #Creates ReportsToSend folder in input(folder)
 except:
