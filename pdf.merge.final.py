@@ -6,21 +6,21 @@ from PyPDF2 import PdfFileMerger
 folder = input(str("Please Enter \"YYYY MM\": "))
 
 """"Updated the new attachments in the Share Drive. May need to be renamed"""
-path = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\OriginalFinancePackagePDF\*"        #save pdfs to this folder
-wc_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\02-22 Workers Comp Scorecard Consolidated.xlsx.pdf"
-ar_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\220317 - AR Dashboard_2022.02.pdf"        #folder has to be copied into each input folder unless pulling from Finance package folder
+path = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\OriginalFinancePackagePDF\*"        # Save pdfs to this folder. Compelted via VBA
+wc_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\WC\*.pdf"           # Save WC to this path as pdf
+ar_file = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToAdd\AR\*.pdf"           # Save AR to this path as pdf
 
 
 """Begin the process of reports to send by appending the attachments"""
 try:
-    os.mkdir(fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToSend")               #Creates ReportsToSend folder in input(folder)
+    os.mkdir(fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToSend")               # Creates ReportsToSend folder in input(folder)
 except:
     pass
 counter = 0
 #Iterate through files and assign the original name with the files appended
 for filename in glob(path):
     if filename.endswith(".pdf"):
-        pdftopFile = open(filename, 'rb')                                                   #pdf hierarchy
+        pdftopFile = open(filename, 'rb')                                                   # Pdf hierarchy
         pdfmidFile = open(ar_file, 'rb')
         pdfbottomFile = open(wc_file, 'rb')
         pdftopReader = PyPDF2.PdfFileReader(pdftopFile)
@@ -41,7 +41,7 @@ for filename in glob(path):
         # assign to updated folder
         save_location = fr"P:\PACS\Finance\FP&A\Finance Package\{folder}\ReportsToSend\{os.path.basename(filename)}"
 
-        pdfOutputFile = open(save_location, 'wb')                                           # save under Updated w WC with same filename
+        pdfOutputFile = open(save_location, 'wb')                                           # Save under Updated w WC with same filename
         pdfWriter.write(pdfOutputFile)
         pdfOutputFile.close()
         pdftopFile.close()
